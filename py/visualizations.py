@@ -250,9 +250,11 @@ def viz_most_least_similar(bug_fix_data,
     if distance_metric == 'minkowski':
         if 'minkowski_power' in kwargs:
             minkowski_power = kwargs['minkowski_power']
-        else: 
+        else:
             minkowski_power = 3
             print('Defaut minkowski_power = 3 set...')
+    else: 
+        minkowski_power = None
 
     fig = plt.figure()
     fig.set_figheight(7)
@@ -263,7 +265,7 @@ def viz_most_least_similar(bug_fix_data,
         samples_for_label = bug_fix_data[np.argwhere(bug_fix_labels == label)]
         heatmap_for_label = heatmaps[label]
 
-        sorted_scores = measure_distance(samples_for_label, heatmap_for_label, distance_metric, minkowski_power = 5)
+        sorted_scores = measure_distance(samples_for_label, heatmap_for_label, distance_metric, minkowski_power = minkowski_power)
 
         # Plots
         ax = fig.add_subplot(3, 10, label+1)
@@ -279,6 +281,76 @@ def viz_most_least_similar(bug_fix_data,
         plt.title('Best ' + str(label))
 
         ax = fig.add_subplot(3, 10, label+21)
+        plt.imshow(samples_for_label[sorted_scores[0]].reshape(28,28), interpolation='gaussian')
+        plt.axis('off')
+        plt.tight_layout()
+        plt.title('Worst ' + str(label))
+
+
+
+def viz_most_similar(bug_fix_data,
+                     bug_fix_labels,
+                     labels,
+                     heatmaps,
+                     distance_metric='dot',
+                     **kwargs):
+
+    if distance_metric == 'minkowski':
+        if 'minkowski_power' in kwargs:
+            minkowski_power = kwargs['minkowski_power']
+        else:
+            minkowski_power = 3
+            print('Defaut minkowski_power = 3 set...')
+    else: 
+        minkowski_power = None
+
+    fig = plt.figure()
+    fig.set_figheight(7)
+    fig.set_figwidth(15)
+
+    for label in labels:
+
+        samples_for_label = bug_fix_data[np.argwhere(bug_fix_labels == label)]
+        heatmap_for_label = heatmaps[label]
+
+        sorted_scores = measure_distance(samples_for_label, heatmap_for_label, distance_metric, minkowski_power = minkowski_power)
+
+        # Plots
+        ax = fig.add_subplot(3, 10, label+1)
+        plt.imshow(samples_for_label[sorted_scores[-1]].reshape(28,28), interpolation='gaussian')
+        plt.axis('off')
+        plt.tight_layout()
+        plt.title('Best ' + str(label))
+
+def viz_least_similar(bug_fix_data,
+                      bug_fix_labels,
+                      labels,
+                      heatmaps,
+                      distance_metric='dot',
+                      **kwargs):
+
+    if distance_metric == 'minkowski':
+        if 'minkowski_power' in kwargs:
+            minkowski_power = kwargs['minkowski_power']
+        else:
+            minkowski_power = 3
+            print('Defaut minkowski_power = 3 set...')
+    else: 
+        minkowski_power = None
+
+    fig = plt.figure()
+    fig.set_figheight(7)
+    fig.set_figwidth(15)
+
+    for label in labels:
+
+        samples_for_label = bug_fix_data[np.argwhere(bug_fix_labels == label)]
+        heatmap_for_label = heatmaps[label]
+
+        sorted_scores = measure_distance(samples_for_label, heatmap_for_label, distance_metric, minkowski_power = minkowski_power)
+
+        # Plots
+        ax = fig.add_subplot(3, 10, label+1)
         plt.imshow(samples_for_label[sorted_scores[0]].reshape(28,28), interpolation='gaussian')
         plt.axis('off')
         plt.tight_layout()

@@ -73,4 +73,9 @@ def measure_distance(data, heatmap, distance_metric, **kwargs):
             scores[i] = spatial.distance.braycurtis(np.ravel(data[i]), np.ravel(heatmap))
         scores = np.flip(np.argsort(scores))
 
+    else:
+        return null
+        print("Please select a distance metric from the following list: \
+              'dot', 'cosine', 'manhattan', 'euclidean', 'minkowski', 'earthmover', 'chebyshev', 'canberra', 'braycurtis'")
+
     return scores
