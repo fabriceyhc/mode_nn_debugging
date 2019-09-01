@@ -65,7 +65,7 @@ def measure_distance(data, heatmap, distance_metric, **kwargs):
 
     elif distance_metric == 'canberra':
         for i in np.arange(data.shape[0]):
-            scores[i] = spatial.distance.chebyshev(np.ravel(data[i]), np.ravel(heatmap))
+            scores[i] = spatial.distance.canberra(np.ravel(data[i]), np.ravel(heatmap))
         scores = np.flip(np.argsort(scores))
 
     elif distance_metric == 'braycurtis':
