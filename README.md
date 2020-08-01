@@ -1,6 +1,10 @@
 # mode_nn_debugging
 MODE: Automated Neural Network Model Debugging via State Differential Analysis and Input Selection - Replication Project
 
+In addition to replicating the orig work in tensorflow / keras, this project also investigates using alternative distance metrics for finding the next set of inputs to train on depending on whether the model is underfitting or overfitting. For the case of underfitting, the algorithm seeks to find "best" inputs with the smallest distance from the heatmap representing the "standard" for a given class. For the case of overfitting, the algorithm seeks to find "worst" inputs with the greatest distance from the same class heatmaps. The impact of distance metric has a significant impact on the order and type of inputs selected for subsequent training batches and examples of them can be seen below. 
+
+<img src="/img/best.png" width="49%" style="display:inline;"> <img src="/img/worst.png" width="49%" style="display:inline;">
+
 ## Getting Started
 In order to run this project, you'll need to clone `master` to your local machine. You'll now need to set up an environment for running the main jupyter notebook and the supporting `py\` functions. I recommend having an anaconda environment and initializing it as follows (from the project directory):
 
