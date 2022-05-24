@@ -1,5 +1,5 @@
 numpy==1.16.2
 matplotlib==3.0.3
 scipy==1.2.1
-tensorflow==1.15.2
+tensorflow==2.6.4
 Keras==2.2.4
